@@ -1,4 +1,1 @@
-# Network Diagram
-
-*
-    ![diagram1](images/network-diagram.jpeg)
+This repo creates a single FortiGate in GCP, protecting a Ubuntu web server running Juice Shop
