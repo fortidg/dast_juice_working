@@ -1,0 +1,10 @@
+version: v1
+
+id:
+  org: 92d9b58c-c4a9-48df-96ee-3016eb9836a4
+  app: 7506b0f9-3dfb-42fc-b53b-7b85dc66f18c
+
+dast:
+  url: https://www.choogyddad.com
+  fortipentest_scanner: true #true|false
+  full_scan: true #true|false
