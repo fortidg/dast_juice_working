@@ -1,4 +1,4 @@
-# GCP region
+# GCP region string
 variable "region" {
   type    = string
   default = "us-central1" #Default Region
