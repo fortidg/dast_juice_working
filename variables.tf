@@ -24,7 +24,7 @@ variable "token" {
 # 7.2.3 byol is projects/fortigcp-project-001/global/images/fortinet-fgt-723-20221110-001-w-license
 variable "image" {
   type    = string
-  default = "projects/fortigcp-project-001/global/images/fortinet-fgtondemand-723-20221110-001-w-license"
+  default = "projects/fortigcp-project-001/global/images/fortinet-fgt-724-20230310-001-w-license"
 }
 
 variable "ubu-image" {
@@ -35,7 +35,7 @@ variable "ubu-image" {
 # GCP instance machine type
 variable "machine" {
   type    = string
-  default = "n1-standard-1"
+  default = "n1-standard-2"
 }
 /* # VPC CIDR
 variable "vpc_cidr" {

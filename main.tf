@@ -101,6 +101,10 @@ resource "google_compute_firewall" "allow-internal" {
   target_tags   = ["allow-internal"]
 }
 
+# Create Static Public IP
+resource "google_compute_address" "static" {
+  name = "tec-fgt-${random_string.random_name_post.result}-pip"
+}
 
 # Create FGTVM compute instance
 resource "google_compute_instance" "fortigate" {
@@ -122,6 +126,7 @@ resource "google_compute_instance" "fortigate" {
   network_interface {
     subnetwork = google_compute_subnetwork.untrust.name
     access_config {
+          nat_ip = google_compute_address.static.address
     }
   }
   network_interface {
@@ -169,6 +174,12 @@ resource "google_compute_instance" "ubuntu" {
 data "template_file" "linux-metadata" {
 template = <<EOF
 #!/bin/bash
+## add student1 user, make them sudoer and allow pasword auth
+/usr/sbin/useradd student1
+echo student1:Fortinet1! | chpasswd
+usermod -aG sudo student1
+sudo sed -i "/^[^#]*PasswordAuthentication[[:space:]]no/c\PasswordAuthentication yes" /etc/ssh/sshd_config
+sudo service sshd restart
 exec > >(tee /var/log/user-data.log|logger -t user-data -s 2>/dev/console) 2>&1
 echo "Wait for Internet access through the FGTs"
 while ! curl --connect-timeout 3 "http://www.google.com" &> /dev/null
@@ -184,12 +195,6 @@ cd juice-shop
 npm install
 npm start
 cd
-## add student1 user, make them sudoer and allow pasword auth
-/usr/sbin/useradd student1
-echo student1:Fortinet1! | chpasswd
-usermod -aG sudo student1
-sudo sed -i "/^[^#]*PasswordAuthentication[[:space:]]no/c\PasswordAuthentication yes" /etc/ssh/sshd_config
-sudo service sshd restart
 EOF
 }
 

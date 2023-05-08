@@ -10,3 +10,4 @@
 *.csv
 .terraform*
 *.pem
+*.lic
