@@ -33,6 +33,21 @@ jobs:
           docker pull registry.fortidevsec.forticloud.com/fdevsec_sast:latest
           docker run --rm --mount type=bind,source=$PWD,target=/scan registry.fortidevsec.forticloud.com/fdevsec_sast:latest
           env | grep -E "GITHUB_ACTIONS|GITHUB_RUN_NUMBER|GITHUB_REF_NAME|GITHUB_SHA" > /tmp/env
-          docker pull registry.fortidevsec.forticloud.com/fdevsec_dast:latest
-          docker run --rm --env-file /tmp/env --mount type=bind,source=$PWD,target=/scan registry.fortidevsec.forticloud.com/fdevsec_dast:latest
           
+name: FortiDAST Proxy Server
+on:
+  push:
+   branches: [ main ]
+  pull_request:
+   branches: [ main ]
+jobs:
+  build:
+   runs-on: self-hosted
+   steps:
+   - uses: actions/checkout@v2
+   - name: DAST_PROXY_SERVER
+     run: |
+        export EMAIL=dgooch@fortinet.com LICENSE_SERIAL=FFPENT0000232040 ASSET_TOKEN=VVm8YERC8EPQAeT1bqlO18wTXA5EtSlls4+/pitgbMdc1infuOHqKgMxeKDrt/8OHKnQsfC4dB5RloiWSDRO8Lp8MzMA8Gu2jA3jAA== SCANURL=https://www.choogyddad.com SCANTYPE=1 ASSET=bc938243-3597-4792-bf67-09e2acc4051a
+        env | grep -E "EMAIL|LICENSE_SERIAL|ASSET_TOKEN|SCANURL|SCANTYPE|ASSET" > /tmp/env
+        docker pull registry.fortidast.forticloud.com/dastdevopsproxy:latest
+        docker run --rm --env-file /tmp/env --network=host registry.fortidast.forticloud.com/dastdevopsproxy:latest
