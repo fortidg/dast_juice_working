@@ -34,7 +34,7 @@ jobs:
           docker run --rm --mount type=bind,source=$PWD,target=/scan registry.fortidevsec.forticloud.com/fdevsec_sast:latest
           env | grep -E "GITHUB_ACTIONS|GITHUB_RUN_NUMBER|GITHUB_REF_NAME|GITHUB_SHA" > /tmp/env 
   dast:
-   runs-on: self-hosted
+   runs-on: ubuntu-latest
    steps:
    - uses: actions/checkout@v2
    - name: DAST_PROXY_SERVER
