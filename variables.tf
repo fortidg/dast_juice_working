@@ -3,7 +3,7 @@ variable "region" {
   type    = string
   default = "us-central1" #Default Region
 }
-# GCP zone
+#  GCP zone
 variable "zone" {
   type    = string
   default = "us-central1-c" #Default Zone
