@@ -32,7 +32,7 @@ variable "ubu-image" {
   default = "ubuntu-os-pro-cloud/ubuntu-pro-2004-lts"
 }
 
-# GCP instance machine type
+# GCP instance machine type standard
 variable "machine" {
   type    = string
   default = "n1-standard-2"
