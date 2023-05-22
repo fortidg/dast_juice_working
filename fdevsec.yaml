@@ -7,4 +7,4 @@ id:
 dast:
   url: https://www.choogyddad.com
   fortipentest_scanner: true #true|false
-  full_scan: true #true|false
+  full_scan: false #true|false
